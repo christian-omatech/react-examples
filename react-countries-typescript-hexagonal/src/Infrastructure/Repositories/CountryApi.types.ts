@@ -1,4 +1,4 @@
-export interface CountryApi {
+export type CountryApi = {
     name: {
         common: string;
     };
@@ -22,4 +22,4 @@ export interface CountryApi {
     flags: {
         svg: string;
     };
-}
+};

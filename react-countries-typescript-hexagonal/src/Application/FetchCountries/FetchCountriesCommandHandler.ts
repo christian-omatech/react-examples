@@ -4,7 +4,7 @@ import CountryRepositoryInterface from '../../Domain/Contracts/CountryRepository
 import { Country } from '../../Domain/Country';
 
 @injectable()
-export class GetAllCountriesCommandHandler {
+export class FetchCountriesCommandHandler {
     private countryRepository: CountryRepositoryInterface;
 
     public constructor(
@@ -14,5 +14,6 @@ export class GetAllCountriesCommandHandler {
         this.countryRepository = countryRepository;
     }
 
-    public handle = (): Promise<Country[]> => this.countryRepository.getAll();
+    public handle = (): Promise<Country[]> =>
+        this.countryRepository.fetchCountries();
 }

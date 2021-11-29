@@ -3,10 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { CountryTable } from './Presentation/components/CountryTable/CountryTable';
+import { Toaster } from 'react-hot-toast';
 
 ReactDOM.render(
     <React.StrictMode>
         <CountryTable />
+        <Toaster />
     </React.StrictMode>,
     document.getElementById('root')
 );

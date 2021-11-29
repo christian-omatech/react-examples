@@ -1,33 +1,30 @@
-import { GetAllCountriesApi } from './../Services/GetAllCountriesApi';
 import CountryRepositoryInterface from '../../Domain/Contracts/CountryRepositoryInterface';
 import { Country } from '../../Domain/Country';
-import { CountryApi } from '../Services/CountryApi.types';
+import { CountryApi } from './CountryApi.types';
 import { injectable } from 'tsyringe';
 
 @injectable()
 export class CountryRepository implements CountryRepositoryInterface {
-    private getAllCountries: GetAllCountriesApi;
-
-    public constructor(getAllCountrise: GetAllCountriesApi) {
-        this.getAllCountries = getAllCountrise;
-    }
-
-    public async getAll(): Promise<Country[]> {
-        const countries = await this.getAllCountries.fetch();
-        return countries.map((country: CountryApi): Country => {
-            return new Country({
-                name: country.translations,
-                cca2: country.cca2,
-                cca3: country.cca3,
-                capital: country.capital?.join(', '),
-                population: country.population,
-                region: country.region,
-                subregion: country.subregion,
-                flag: country.flags.svg,
-                currencies: this.objectToString(country.currencies),
-                languages: this.objectToString(country.languages),
+    public async fetchCountries(): Promise<Country[]> {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        if (response.ok) {
+            const countries = await response.json();
+            return countries.map((country: CountryApi): Country => {
+                return new Country({
+                    name: country.translations,
+                    cca2: country.cca2,
+                    cca3: country.cca3,
+                    capital: country.capital?.join(', '),
+                    population: country.population,
+                    region: country.region,
+                    subregion: country.subregion,
+                    flag: country.flags.svg,
+                    currencies: this.objectToString(country.currencies),
+                    languages: this.objectToString(country.languages),
+                });
             });
-        });
+        }
+        throw new Error(response.status.toString());
     }
 
     private objectToString = (value: any): string => {
