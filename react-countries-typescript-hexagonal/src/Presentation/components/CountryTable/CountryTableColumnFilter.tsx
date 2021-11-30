@@ -15,10 +15,10 @@ export const CountryTableColumnFilter = ({
     }: ChangeEvent<HTMLInputElement>): void => {
         setColumns((prevState: CountryColumn[]): CountryColumn[] => {
             const newState = [...prevState];
-            const item = newState.find(
+            const column = newState.find(
                 (column: CountryColumn): boolean => column.name === target.name
             ) ?? { isVisible: null };
-            item.isVisible = target.checked;
+            column.isVisible = target.checked;
             return newState;
         });
     };

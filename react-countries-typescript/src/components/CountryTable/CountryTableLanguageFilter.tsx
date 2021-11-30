@@ -23,7 +23,7 @@ export const CountryTableLanguageFilter = ({
         setColumns((prevState: CountryColumn[]): CountryColumn[] => {
             const newState = [...prevState];
             const column = newState.find(
-                (col: CountryColumn): boolean => col.name === 'name'
+                (column: CountryColumn): boolean => column.name === 'name'
             ) ?? {
                 field: '',
             };

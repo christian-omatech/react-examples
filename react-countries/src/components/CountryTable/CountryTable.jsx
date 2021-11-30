@@ -33,10 +33,10 @@ export const CountryTable = () => {
                 <>
                     <CountryTableLanguageFilter columns={columns} setColumns={setColumns}/>
                     <CountryTableColumnFilter columns={columns} setColumns={setColumns} />
-                    {<table className="table table-striped table-sm">
+                    <table className="table table-striped table-sm">
                         <CountryTableHeader columns={columns}/>
                         <CountryTableBody columns={columns} rows={countries} />
-                    </table>}
+                    </table>
                 </>
                 : <span>Loading...</span>
             }

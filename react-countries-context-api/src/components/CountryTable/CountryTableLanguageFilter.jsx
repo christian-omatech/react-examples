@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { languages } from "./languages";
+import { AppContext } from "../../context/AppContext";
 
-export const CountryTableLanguageFilter = ({ setColumns }) => {
+export const CountryTableLanguageFilter = () => {
+    const [context, setContext] = useContext(AppContext);
     const [currentLanguage, setCurrentLanguage] = useState({
         iso: "spa",
         name: "Spanish"
     });
 
     const translateNameColumn = (language) => {
-        setColumns((prevState) => {
-            const newState = [...prevState];
-            const column = newState.find((column) => column.name === "name");
-            column.field = 'translations.' + language.iso + '.common';
-            return newState;
-        });
+        const newState = Object.assign({}, context);
+        const column = newState.columns.find((column) => column.name === "name");
+        column.field = 'translations.' + language.iso + '.common';
+        setContext(newState);
         setCurrentLanguage(language);
     }
 

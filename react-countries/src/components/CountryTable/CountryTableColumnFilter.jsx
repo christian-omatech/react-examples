@@ -2,8 +2,8 @@ export const CountryTableColumnFilter = ({ columns, setColumns }) => {
     const setColumnVisibility = ({ target }) => {
         setColumns((prevState) => {
             let newState = [...prevState];
-            const item = newState.find((column) => column.name === target.name);
-            item.isVisible = target.checked;
+            const column = newState.find((column) => column.name === target.name);
+            column.isVisible = target.checked;
             return newState;
         })
     }

@@ -1,16 +1,19 @@
-export const CountryTableColumnFilter = ({ columns, setColumns }) => {
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+
+export const CountryTableColumnFilter = () => {
+    const [context, setContext] = useContext(AppContext);
+
     const setColumnVisibility = ({ target }) => {
-        setColumns((prevState) => {
-            let newState = [...prevState];
-            const column = newState.find((column) => column.name === target.name);
-            column.isVisible = target.checked;
-            return newState;
-        })
+        const newState = Object.assign({}, context);
+        const column = newState.columns.find((column) => column.name === target.name);
+        column.isVisible = target.checked;
+        setContext(newState);
     }
 
     return (
         <div className="d-flex flex-row justify-content-start align-items-start flex-wrap pb-4">
-            {columns.map(({name, isVisible}) =>
+            {context.columns.map(({name, isVisible}) =>
                 <label key={name} className="form-check">
                     <input
                         className="form-check-input"

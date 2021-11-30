@@ -10,7 +10,7 @@ export const CountryTableLanguageFilter = ({ setColumns }) => {
     const translateNameColumn = (language) => {
         setColumns((prevState) => {
             const newState = [...prevState];
-            const column = newState.find((prop) => prop.name === "name");
+            const column = newState.find((column) => column.name === "name");
             column.field = 'translations.' + language.iso + '.common';
             return newState;
         });
